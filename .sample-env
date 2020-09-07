@@ -1,0 +1,2 @@
+# Substituir <user-name> e <database> pelo valores corretos. Se for testar localhost, colocar a connection string como: "mongodb://localhost:27017"
+DB_CONNECTION="mongodb://dbUser:<user-name>@database-prod-shard-00-00.ttafb.mongodb.net:27017,database-prod-shard-00-01.ttafb.mongodb.net:27017,database-prod-shard-00-02.ttafb.mongodb.net:27017/<database>?authSource=admin&replicaSet=atlas-11rssp-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true"
