@@ -8,8 +8,13 @@ const findAll = async (req, res) => {
   const period = req.query.period;
 
   try {
-    var condition = period;    
-  
+    const condition = period;    
+    const year = condition.split('-')[0];
+    const month = condition.split('-')[1];
+
+    if (!(year) || !(month)) 
+      return res.status(400).send({ "error": 'É necessário informar o parâmetro "period", cujo valor deve estar no formato yyyy-mm'});
+
     const data = await transactions.find({ yearMonth: condition });
     res.status(200).send(data);    
   } catch (error) {
