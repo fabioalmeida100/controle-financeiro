@@ -1,0 +1,16 @@
+.item {
+  height: 75px;
+  border: solid lightgray 1px;
+  padding: 10px 0 5px 0;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  font-size: 1.3em;
+}
+
+strong {
+  display: block;
+}
+
+.mt10 {
+  margin-top: 10px;
+}
