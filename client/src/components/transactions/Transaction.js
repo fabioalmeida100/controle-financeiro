@@ -8,7 +8,7 @@ export default function Transaction({allTransactions}) {
       {
         allTransactions.map(transaction => {
           return (
-            <div className={`${css.item} valign-wrapper`} style={transaction.type === '-' ? {background: '#ff00005e'} : {background: '#0080008c'}}>
+            <div key={transaction.id} className={`${css.item} valign-wrapper`} style={transaction.type === '-' ? {background: '#ff00005e'} : {background: '#0080008c'}}>
               <div className={`col m1`}><strong>{transaction.day}</strong></div>
               <div className={`col m7`}>
                 <div className={`row ${css.mt10}`}>
@@ -19,8 +19,8 @@ export default function Transaction({allTransactions}) {
                 </div>                
               </div>
               <div className={`col m2`}>{`R$ ${formatNumber(transaction.value)}`}</div>
-              <div className={`col m1`}><i class="small material-icons">create</i></div>
-              <div className={`col m1`}><i class="small material-icons">delete</i></div>
+              <div className={`col m1`}><i className="small material-icons">create</i></div>
+              <div className={`col m1`}><i className="small material-icons">delete</i></div>
             </div>
           )
         })
