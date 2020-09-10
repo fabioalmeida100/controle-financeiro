@@ -7,20 +7,22 @@ import PaginatorMonth from './components/paginator-month/PaginatorMonth';
 import { findAll } from '../src/api/apiService'
 
 export default function App() {
+  const [yearMonthSelected, setYearMonthSelected] = useState("2019-01")
   const [allTransactions, setAllTransactions] = useState([]);
   const [amoutLancamentoValue, setAmoutLancamentoValue] = useState(0);
   const [revenueValue, setRevenueValue] = useState(0);
   const [expenseValue, setExpenseValue] = useState(0);
   const [balanceValue, setBalanceValue] = useState(0);
+  const [yearMonthList, setYearMonthList] = useState([])
   
   useEffect(() => {
     const getTransactions = async () => {
-      const transactions = await findAll('2019-10');
+      const transactions = await findAll(yearMonthSelected);
       setAllTransactions(transactions.data.sort((a, b) => a.day - b.day))
-    }
+    } 
 
     getTransactions();
-    loadTotalizer();
+    loadTotalizer(); 
   }, [allTransactions])
 
   const loadTotalizer = async () => {
@@ -38,12 +40,16 @@ export default function App() {
     setBalanceValue(revenueValue - expenseValue);
   }
 
+  const handleOnChageYearMonth = async (event) => {
+    setYearMonthSelected(event.target.value)
+  }
+
   return <div className="container">
     <div className={`center ${css.mt10} ${css.fontTitle} `}>
         Controle Financeiro
     </div>
     <div className={`row center ${css.mt10}`}>
-      <PaginatorMonth />
+      <PaginatorMonth handleOnChageYearMonth={ handleOnChageYearMonth } yearMonthList={[]} />
     </div>
     <div className={`row ${css.mt10}`}>
         <Header 
