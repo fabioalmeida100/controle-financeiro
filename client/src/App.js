@@ -4,7 +4,7 @@ import Header from './components/header/Header';
 import Controls from './components/controls/Controls';
 import Transaction from './components/transactions/Transaction';
 import PaginatorMonth from './components/paginator-month/PaginatorMonth';
-import { findAll } from '../src/api/apiService'
+import { findAll, deleteOne } from '../src/api/apiService'
 
 export default function App() {
   const [yearMonthSelected, setYearMonthSelected] = useState("2019-01")
@@ -13,7 +13,6 @@ export default function App() {
   const [revenueValue, setRevenueValue] = useState(0);
   const [expenseValue, setExpenseValue] = useState(0);
   const [balanceValue, setBalanceValue] = useState(0);
-  const [yearMonthList, setYearMonthList] = useState([])
   
   useEffect(() => {
     const getTransactions = async () => {
@@ -23,7 +22,13 @@ export default function App() {
 
     getTransactions();
     loadTotalizer(); 
+  }, [yearMonthSelected])
+
+    
+  useEffect(() => {
+    loadTotalizer(); 
   }, [allTransactions])
+
 
   const loadTotalizer = async () => {
     setAmoutLancamentoValue(allTransactions.length);
@@ -44,6 +49,23 @@ export default function App() {
     setYearMonthSelected(event.target.value)
   }
 
+  const handleActionDelete = async (id) => {
+    const deleteReturn = await deleteOne(id); 
+    
+    if (deleteReturn) {
+      const newAllTransactions = Object.assign([], allTransactions);
+      const deletedIndex = allTransactions.findIndex(
+        (transaction) => transaction.id === id
+      );    
+      newAllTransactions.splice(deletedIndex, 1);
+      setAllTransactions(newAllTransactions);
+    }    
+  }
+
+  const handleActionEdit = async (id) => {
+    console.log('edit')
+  }
+
   return <div className="container">
     <div className={`center ${css.mt10} ${css.fontTitle} `}>
         Controle Financeiro
@@ -62,7 +84,7 @@ export default function App() {
         <Controls />
     </div>
     <div className={`row ${css.mt10}`}>
-        <Transaction allTransactions={allTransactions}/>
+        <Transaction allTransactions={allTransactions} handleActionDelete={handleActionDelete} handleActionEdit={handleActionEdit}/>
 
     </div>
   </div>;

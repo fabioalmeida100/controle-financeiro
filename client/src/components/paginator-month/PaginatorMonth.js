@@ -1,7 +1,7 @@
 import React from 'react'
 import css from './paginator.month.css'
 
-export default function PaginatorMonth({handleOnChageYearMonth, yearMonthList}) {
+export default function PaginatorMonth({handleOnChageYearMonth}) {
   return (
     <div className="center">
           <select className="browser-default" onChange={handleOnChageYearMonth}>

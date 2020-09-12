@@ -7,4 +7,8 @@ const findAll = async (yearMonth) => {
   return await axios.get(`${API_URL}?period=${yearMonth}`);
 }
 
-export { findAll }
+const deleteOne = async (id) => {
+  return await axios.delete(`${API_URL}/${id}`);
+}
+
+export { findAll, deleteOne }

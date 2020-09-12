@@ -1,8 +1,10 @@
 import React from 'react'
 import css from './transaction.module.css'
 import { formatNumber } from '../../helper/formatHelpers'
+import Action from '../action/Action'
 
-export default function Transaction({allTransactions}) {
+export default function Transaction({allTransactions, handleActionEdit, handleActionDelete }) {
+
   return (
     <div className="row">
       {
@@ -19,8 +21,8 @@ export default function Transaction({allTransactions}) {
                 </div>                
               </div>
               <div className={`col m2`}>{`R$ ${formatNumber(transaction.value)}`}</div>
-              <div className={`col m1`}><i className="small material-icons">create</i></div>
-              <div className={`col m1`}><i className="small material-icons">delete</i></div>
+              <div className={`col m1`}><Action type="edit" id={transaction.id} handleActionClick={handleActionEdit}/></div>
+              <div className={`col m1`}><Action type="delete" id={transaction.id} handleActionClick={handleActionDelete} /></div>
             </div>
           )
         })
