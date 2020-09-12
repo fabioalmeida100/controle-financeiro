@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Modal from 'react-modal'
+import moment from 'moment'
 import { findOne, insertTransaction, updateTransaction } from '../../api/apiService'
 
 Modal.setAppElement('#root');
@@ -40,12 +41,12 @@ export default function ModalTransaction({idToEdit, handleCloseModal}) {
     findTransaction();
   }, [])
   
-  const handleChangeDate = (event) => {        
-    setYearMonthDay(event.target.value);
-    setYearMonth(event.target.value.substr(0,7));
-    setYear(parseInt(event.target.value.substr(0,4)));
-    setMonth(parseInt(event.target.value.substr(5,2)));
-    setDay(parseInt(event.target.value.substr(8,2)));
+  const handleChangeDate = (event) => {
+      setYearMonthDay(event.target.value);
+      setYearMonth(event.target.value.substr(0,7));
+      setYear(parseInt(event.target.value.substr(0,4)));
+      setMonth(parseInt(event.target.value.substr(5,2)));
+      setDay(parseInt(event.target.value.substr(8,2)));  
   } 
 
   const handleType = (event) => {
@@ -67,30 +68,43 @@ export default function ModalTransaction({idToEdit, handleCloseModal}) {
   const handleSave = async (event) => {
     event.preventDefault();
 
-    let transaction = {
-      type,
-      description, 
-      category,
-      value, 
-      yearMonthDay, 
-      yearMonth,
-      year,
-      month,
-      day
-    }
-
-    if (idToEdit != null) {
-      transaction = {
-        ...transaction,
-        id: idToEdit
+    if (validations()) {
+      let transaction = {
+        type,
+        description, 
+        category,
+        value, 
+        yearMonthDay, 
+        yearMonth,
+        year,
+        month,
+        day
       }
 
-      await updateTransaction(transaction);     
-    } else {
-      await insertTransaction(transaction);
+      if (idToEdit != null) {
+        transaction = {
+          ...transaction,
+          id: idToEdit
+        }
+
+        await updateTransaction(transaction);     
+      } else {
+        await insertTransaction(transaction);
+      }
+
+      handleCloseModal();
+    }
+  }
+
+  const validations = () => {
+    let isValid = true;
+
+    if (!(moment(yearMonthDay).isValid())) {
+      alert('Data informada inválida!');
+      isValid = false;
     }
 
-    handleCloseModal();
+    return isValid;
   }
 
   return (
