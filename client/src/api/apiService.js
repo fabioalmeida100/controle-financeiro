@@ -7,13 +7,17 @@ const findAll = async (yearMonth) => {
   return await axios.get(`${API_URL}?period=${yearMonth}`);
 }
 
+const findOne = async (id) => {
+  return await axios.get(`${API_URL}/${id}`)
+}
+
 const insertTransaction = async (transaction) => {
   const response = await axios.post(API_URL, transaction);
   return response.data;
 }
 
 const updateTransaction = async (transaction) => {
-  const response = await axios.put(API_URL, transaction);
+  const response = await axios.put(`${API_URL}/${transaction.id}`, transaction);
   return response.data;
 }
 
@@ -21,4 +25,4 @@ const deleteOne = async (id) => {
   return await axios.delete(`${API_URL}/${id}`);
 }
 
-export { findAll, insertTransaction, updateTransaction, deleteOne }
+export { findAll, findOne, insertTransaction, updateTransaction, deleteOne }

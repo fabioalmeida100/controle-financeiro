@@ -19,6 +19,7 @@ export default function App() {
   const [expenseValue, setExpenseValue] = useState(0);
   const [balanceValue, setBalanceValue] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
+  const [transactionIdToEdit, setTransactionIdToEdit] = useState(null)
   
   useEffect(() => {
     const getTransactions = async () => {
@@ -82,16 +83,20 @@ export default function App() {
     setModalOpen(true);
   }
 
-  const handleCloseModal = () => {
-    setModalOpen(false)
+  const handleCloseModal = async () => {
+    setModalOpen(false);
+    const transactions = await findAll(yearMonthSelected);
+    setAllTransactions(transactions.data.sort((a, b) => a.day - b.day))
   }
   
-  const handleActionInsert = async (id) => {
+  const handleActionInsert = async () => {
     handleOpenModal();
+    setTransactionIdToEdit(null);
   }  
 
   const handleActionEdit = async (id) => {
     handleOpenModal();
+    setTransactionIdToEdit(id)
   }
 
   return <div className="container">
@@ -120,7 +125,7 @@ export default function App() {
         <Transaction allTransactions={allTransactions} handleActionDelete={handleActionDelete} handleActionEdit={handleActionEdit}/>
     </div>
     
-    {modalOpen && <ModalTransaction handleCloseModal={handleCloseModal}/>}
+    {modalOpen && <ModalTransaction idToEdit={transactionIdToEdit} handleCloseModal={handleCloseModal}/>}
 
   </div>;
 }
