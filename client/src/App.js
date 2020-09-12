@@ -6,6 +6,7 @@ import Transaction from './components/transactions/Transaction';
 import PaginatorMonth from './components/paginator-month/PaginatorMonth';
 import { findAll, deleteOne } from '../src/api/apiService'
 import Button from './components/button/Button';
+import ModalTransaction from './components/modal/ModalTransaction';
 
 const NOVO = 'NOVO';
 const EDITAR = 'EDITAR';
@@ -17,6 +18,7 @@ export default function App() {
   const [revenueValue, setRevenueValue] = useState(0);
   const [expenseValue, setExpenseValue] = useState(0);
   const [balanceValue, setBalanceValue] = useState(0);
+  const [modalOpen, setModalOpen] = useState(false);
   
   useEffect(() => {
     const getTransactions = async () => {
@@ -77,11 +79,19 @@ export default function App() {
   }
 
   const handleOpenModal = async (type) => {
-    console.log(type);
+    setModalOpen(true);
   }
 
+  const handleCloseModal = () => {
+    setModalOpen(false)
+  }
+  
+  const handleActionInsert = async (id) => {
+    handleOpenModal();
+  }  
+
   const handleActionEdit = async (id) => {
-    console.log('edit')
+    handleOpenModal();
   }
 
   return <div className="container">
@@ -100,7 +110,7 @@ export default function App() {
     </div>
     <div className={`row ${css.mt10}`}>
         <div className="col m3">
-          <Button handleOpenModal={handleOpenModal} type={NOVO}/>
+          <Button handleOpenModal={handleActionInsert} type={NOVO}/>
         </div>
         <div className="col m9">
           <Filter handleFilter={handleFilter}/>
@@ -110,7 +120,7 @@ export default function App() {
         <Transaction allTransactions={allTransactions} handleActionDelete={handleActionDelete} handleActionEdit={handleActionEdit}/>
     </div>
     
-
+    {modalOpen && <ModalTransaction handleCloseModal={handleCloseModal}/>}
 
   </div>;
 }
