@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import css from './app.module.css';
 import Header from './components/header/Header';
-import Controls from './components/controls/Controls';
+import Filter from './components/filter/Filter';
 import Transaction from './components/transactions/Transaction';
 import PaginatorMonth from './components/paginator-month/PaginatorMonth';
 import { findAll, deleteOne } from '../src/api/apiService'
@@ -49,6 +49,16 @@ export default function App() {
     setYearMonthSelected(event.target.value)
   }
 
+  const handleFilter = async (event) => {
+    const searchTerm = event.target.value.toLowerCase();
+    const transactions = await findAll(yearMonthSelected);
+    const newAllTransactions = transactions.data.filter((item) => {
+      return item.description.toLowerCase().includes(searchTerm);
+    })
+
+    setAllTransactions(newAllTransactions);
+  }
+
   const handleActionDelete = async (id) => {
     const deleteReturn = await deleteOne(id); 
     
@@ -80,8 +90,8 @@ export default function App() {
           expenseValue={expenseValue}
           balanceValue={balanceValue} />
     </div>
-    <div className={`row ${css.mt10}`}>
-        <Controls />
+    <div className={`row ${css.mt10}`}>          
+        <Filter handleFilter={handleFilter}/>
     </div>
     <div className={`row ${css.mt10}`}>
         <Transaction allTransactions={allTransactions} handleActionDelete={handleActionDelete} handleActionEdit={handleActionEdit}/>
