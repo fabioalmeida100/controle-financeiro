@@ -6,10 +6,10 @@ import { findOne, insertTransaction, updateTransaction } from '../../api/apiServ
 Modal.setAppElement('#root');
 
 
-export default function ModalTransaction({idToEdit, handleCloseModal}) {
+export default function ModalTransaction({idToEdit, handleCloseModal, yearMonthSelected}) {
   const DATE_NOW = new Date();
   const DATE_NOW_YYYYMMDD = 
-    `${DATE_NOW.getUTCFullYear().toString()}-${(DATE_NOW.getUTCMonth()+1).toString().padStart(2, '0')}-${DATE_NOW.getUTCDate().toString().padStart(2, '0')}`;
+    `${yearMonthSelected}-${DATE_NOW.getUTCDate().toString().padStart(2, '0')}`;
 
   const [type, setType] = useState('-');
   const [description, setDescription] = useState('');

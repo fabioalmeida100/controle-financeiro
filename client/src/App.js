@@ -122,7 +122,7 @@ export default function App() {
         <Transaction allTransactions={allTransactions} handleActionDelete={handleActionDelete} handleActionEdit={handleActionEdit}/>
     </div>
     
-    {modalOpen && <ModalTransaction idToEdit={transactionIdToEdit} handleCloseModal={handleCloseModal}/>}
+    {modalOpen && <ModalTransaction idToEdit={transactionIdToEdit} handleCloseModal={handleCloseModal} yearMonthSelected={yearMonthSelected}/>}
 
   </div>;
 }
