@@ -8,9 +8,6 @@ import { findAll, deleteOne } from '../src/api/apiService'
 import Button from './components/button/Button';
 import ModalTransaction from './components/modal/ModalTransaction';
 
-const NOVO = 'NOVO';
-const EDITAR = 'EDITAR';
-
 export default function App() {
   const [yearMonthSelected, setYearMonthSelected] = useState("2019-01")
   const [allTransactions, setAllTransactions] = useState([]);
@@ -115,7 +112,7 @@ export default function App() {
     </div>
     <div className={`row ${css.mt10}`}>
         <div className="col m3">
-          <Button handleOpenModal={handleActionInsert} type={NOVO}/>
+          <Button handleOpenModal={handleActionInsert}/>
         </div>
         <div className="col m9">
           <Filter handleFilter={handleFilter}/>
