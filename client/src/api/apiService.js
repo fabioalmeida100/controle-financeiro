@@ -12,6 +12,7 @@ const findOne = async (id) => {
 }
 
 const insertTransaction = async (transaction) => {
+  console.log(transaction);
   const response = await axios.post(API_URL, transaction);
   return response.data;
 }

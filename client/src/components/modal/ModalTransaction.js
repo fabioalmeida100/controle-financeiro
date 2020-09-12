@@ -15,10 +15,10 @@ export default function ModalTransaction({idToEdit, handleCloseModal}) {
   const [category, setCategory] = useState('');
   const [value, setValue] = useState(0);
   const [yearMonthDay, setYearMonthDay] = useState(DATE_NOW_YYYYMMDD);
-  const [yearMonth, setYearMonth] = useState('');
-  const [year, setYear] = useState(0);
-  const [month, setMonth] = useState(0);
-  const [day, setDay] = useState(0);
+  const [yearMonth, setYearMonth] = useState(DATE_NOW_YYYYMMDD.substr(0,7));
+  const [year, setYear] = useState(parseInt(DATE_NOW_YYYYMMDD.substr(0,4)));
+  const [month, setMonth] = useState(parseInt(DATE_NOW_YYYYMMDD.substr(5,2)));
+  const [day, setDay] = useState(parseInt(DATE_NOW_YYYYMMDD.substr(8,2)) );
 
   useEffect(() => {
     const findTransaction = async () => {      
@@ -40,7 +40,7 @@ export default function ModalTransaction({idToEdit, handleCloseModal}) {
     findTransaction();
   }, [])
   
-  const handleChangeDate = (event) => {    
+  const handleChangeDate = (event) => {        
     setYearMonthDay(event.target.value);
     setYearMonth(event.target.value.substr(0,7));
     setYear(parseInt(event.target.value.substr(0,4)));
@@ -85,10 +85,12 @@ export default function ModalTransaction({idToEdit, handleCloseModal}) {
         id: idToEdit
       }
 
-      await updateTransaction(transaction);
-
-      handleCloseModal();
+      await updateTransaction(transaction);     
+    } else {
+      await insertTransaction(transaction);
     }
+
+    handleCloseModal();
   }
 
   return (
