@@ -5,6 +5,10 @@ import Filter from './components/filter/Filter';
 import Transaction from './components/transactions/Transaction';
 import PaginatorMonth from './components/paginator-month/PaginatorMonth';
 import { findAll, deleteOne } from '../src/api/apiService'
+import Button from './components/button/Button';
+
+const NOVO = 'NOVO';
+const EDITAR = 'EDITAR';
 
 export default function App() {
   const [yearMonthSelected, setYearMonthSelected] = useState("2019-01")
@@ -72,6 +76,10 @@ export default function App() {
     }    
   }
 
+  const handleOpenModal = async (type) => {
+    console.log(type);
+  }
+
   const handleActionEdit = async (id) => {
     console.log('edit')
   }
@@ -90,12 +98,19 @@ export default function App() {
           expenseValue={expenseValue}
           balanceValue={balanceValue} />
     </div>
-    <div className={`row ${css.mt10}`}>          
-        <Filter handleFilter={handleFilter}/>
+    <div className={`row ${css.mt10}`}>
+        <div className="col m3">
+          <Button handleOpenModal={handleOpenModal} type={NOVO}/>
+        </div>
+        <div className="col m9">
+          <Filter handleFilter={handleFilter}/>
+        </div>
     </div>
     <div className={`row ${css.mt10}`}>
         <Transaction allTransactions={allTransactions} handleActionDelete={handleActionDelete} handleActionEdit={handleActionEdit}/>
-
     </div>
+    
+
+
   </div>;
 }
