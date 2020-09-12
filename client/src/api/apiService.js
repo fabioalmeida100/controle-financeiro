@@ -10,7 +10,7 @@ const findOne = async (id) => {
   return await axios.get(`${API_URL}/${id}`)
 }
 
-const insertTransaction = async (transaction) => {  
+const insertTransaction = async (transaction) => {
   const response = await axios.post(API_URL, transaction);
   return response.data;
 }

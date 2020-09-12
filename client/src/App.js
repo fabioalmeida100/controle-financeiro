@@ -76,7 +76,7 @@ export default function App() {
     }    
   }
 
-  const handleOpenModal = async (type) => {
+  const handleOpenModal = () => {
     setModalOpen(true);
   }
 

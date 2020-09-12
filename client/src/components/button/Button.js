@@ -3,7 +3,7 @@ import css from './button.module.css'
 
 export default function Button({handleOpenModal, type}) {
   const internalHandleOpenModal = () => {
-    handleOpenModal(type)
+    handleOpenModal()
   }
 
   return (
