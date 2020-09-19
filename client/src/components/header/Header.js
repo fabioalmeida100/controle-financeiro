@@ -8,7 +8,7 @@ export default function Header({ amoutLancamentoValue, revenueValue, expenseValu
       <div className="col m3"><div className={css.displayInline}>Lançamentos: </div>{ formatNumber(amoutLancamentoValue) }</div>
       <div style={{color: 'green'}} className="col m3"><div className={css.displayInline}>Receitas: </div>{ formatNumber(revenueValue) }</div>
       <div style={{color: 'red'}} className="col m3"><div className={css.displayInline}>Despesas: </div>{ formatNumber(expenseValue) }</div>
-      <div className="col m3"><div className={css.displayInline}>Saldo: </div>{ formatNumber(balanceValue) }</div>
+      <div style={{ color: balanceValue >= 0 ? 'green': 'red' }}  className="col m3"><div className={css.displayInline}>Saldo: </div>{ formatNumber(balanceValue) }</div>
     </div>
   )
 }
