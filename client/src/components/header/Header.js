@@ -6,8 +6,8 @@ export default function Header({ amoutLancamentoValue, revenueValue, expenseValu
   return (
     <div className={`row ${css.header}`}>
       <div className="col m3"><div className={css.displayInline}>Lançamentos: </div>{ formatNumber(amoutLancamentoValue) }</div>
-      <div className="col m3"><div className={css.displayInline}>Receitas: </div>{ formatNumber(revenueValue) }</div>
-      <div className="col m3"><div className={css.displayInline}>Despesas: </div>{ formatNumber(expenseValue) }</div>
+      <div style={{color: 'green'}} className="col m3"><div className={css.displayInline}>Receitas: </div>{ formatNumber(revenueValue) }</div>
+      <div style={{color: 'red'}} className="col m3"><div className={css.displayInline}>Despesas: </div>{ formatNumber(expenseValue) }</div>
       <div className="col m3"><div className={css.displayInline}>Saldo: </div>{ formatNumber(balanceValue) }</div>
     </div>
   )
