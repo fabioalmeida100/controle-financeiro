@@ -4,7 +4,7 @@ In this project I create a simple, but true cash flow for a people see your bala
 
 You can surfing about the months by the combobox and can insert a new transation for adjust your balance. You can see a screenshot of the project below: 
 
-![Screenshot image](https://github.com/fabioalmeida100/controle-financeiro/blob/master/screenshot.png?raw=true)
+![Screenshot image](https://github.com/fabioalmeida100/controle-financeiro/blob/master/screenshot.jpg?raw=true)
 
 # Features
 
